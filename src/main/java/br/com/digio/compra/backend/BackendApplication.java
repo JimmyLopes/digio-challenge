@@ -32,7 +32,7 @@ public class BackendApplication implements CommandLineRunner {
 	public CompraRepository compraRepository;
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) {
 		//Deleta a Base de teste
 		clienteRepository.deleteAll();
 		produtoRepository.deleteAll();
