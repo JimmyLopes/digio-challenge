@@ -1,6 +1,7 @@
 package br.com.digio.compra.backend.dto;
 
 import br.com.digio.compra.backend.domain.Compra;
+import br.com.digio.compra.backend.utils.StringUtils;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,7 +11,7 @@ public class CompraDTO {
 
     private ClienteDTO cliente;
     private List<ProdutoDTO> produtos;
-    private Double valorCompra;
+    private String valorCompra;
     private LocalDate dataCompra;
 
     public CompraDTO() {
@@ -37,12 +38,12 @@ public class CompraDTO {
         this.produtos = produtos;
     }
 
-    public Double getValorCompra() {
+    public String getValorCompra() {
         return valorCompra;
     }
 
     public void setValorCompra(Double valorCompra) {
-        this.valorCompra = valorCompra;
+        this.valorCompra = StringUtils.formataDoubleParaMoeda(valorCompra);
     }
 
     public LocalDate getDataCompra() {

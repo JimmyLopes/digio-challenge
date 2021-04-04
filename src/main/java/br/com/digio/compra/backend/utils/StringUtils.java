@@ -1,6 +1,9 @@
 package br.com.digio.compra.backend.utils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.MessageFormat;
+import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -36,7 +39,18 @@ public class StringUtils {
      * @param boleano texto de booleano
      * @return o texto convertido
      */
-    public static String converterBooleanParaString(String boleano){
+    public static String converterBooleanParaString(String boleano) {
         return boleano.equals("true") ? "Sim" : "Não";
+    }
+
+    /**
+     * Método que converte um double para duas casas decimais e depois o transforma numa string no formato de moeda brasileiro
+     *
+     * @param valorCompra que será convertido
+     * @return a string formatada no padrão de moeda brasileiro
+     */
+    public static String formataDoubleParaMoeda(Double valorCompra) {
+        return NumberFormat.getCurrencyInstance(new Locale("pt", "BR"))
+                .format(BigDecimal.valueOf(valorCompra).setScale(2, RoundingMode.UNNECESSARY).doubleValue());
     }
 }

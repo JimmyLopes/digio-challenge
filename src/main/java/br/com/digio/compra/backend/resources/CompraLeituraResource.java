@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +29,7 @@ public class CompraLeituraResource implements ResponseResource {
 
     @GetMapping
     public ResponseEntity<RestResponseDTO<List<CompraDTO>>> buscarCompras(@RequestParam(required = false) String cpf,
-                                                                          @RequestParam(required = false) LocalDate dataCompra) {
+                                                                          @RequestParam(required = false) String dataCompra) {
         return retornarSucesso(compraService.buscarCompras(cpf, dataCompra)
                 .stream().map(compra -> mapper.map(compra, CompraDTO.class)).collect(Collectors.toList()));
     }

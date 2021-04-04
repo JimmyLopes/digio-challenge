@@ -60,17 +60,26 @@ public class BackendApplication implements CommandLineRunner {
 
 		Produto produtoTest2 = new Produto();
 		produtoTest2.setNome("Cerveja");
-		produtoTest2.setValor(3.49);
+		produtoTest2.setValor(5.00);
 		produtoTest2.setIsMaioridade(true);
 		produtoTest2.setCategoria(ECategoria.PRIMARIO);
 
 		Compra compraTest1 = new Compra();
-		compraTest1.setDataCompra(LocalDate.now());
+		compraTest1.setDataCompra(LocalDate.of(2019, 10, 10));
 		compraTest1.setCliente(clienteTest1);
 		compraTest1.setProdutos(Arrays.asList(produtoTest1, produtoTest2, produtoTest2));
+		compraTest1.setValorCompra(11.0);
+		compraTest1.setValorCompraComDesconto(9.95);
+
+		Compra compraTest2 = new Compra();
+		compraTest2.setDataCompra(LocalDate.of(2019, 10, 10));
+		compraTest2.setCliente(clienteTest2);
+		compraTest2.setProdutos(Arrays.asList(produtoTest1, produtoTest2, produtoTest2));
+		compraTest2.setValorCompra(11.0);
+		compraTest2.setValorCompraComDesconto(9.95);
 
 		//salva os obj de teste
-		compraRepository.save(compraTest1);
+		compraRepository.saveAll(Arrays.asList(compraTest1, compraTest2));
 		clienteRepository.saveAll(Arrays.asList(clienteTest1, clienteTest2));
 		produtoRepository.saveAll(Arrays.asList(produtoTest1, produtoTest2));
 	}

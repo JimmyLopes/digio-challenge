@@ -9,6 +9,7 @@ import br.com.digio.compra.backend.repository.CompraRepository;
 import br.com.digio.compra.backend.services.ClienteService;
 import br.com.digio.compra.backend.services.CompraService;
 import br.com.digio.compra.backend.services.ProdutoService;
+import br.com.digio.compra.backend.utils.CollectionUtils;
 import br.com.digio.compra.backend.utils.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,12 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Validated
@@ -52,12 +56,21 @@ public class CompraServiceImpl implements CompraService {
     }
 
     @Override
-    public List<Compra> buscarCompras(String cpf, LocalDate dataCompra) {
-        validaParametrosDeCompra(cpf, dataCompra);
-        List<Compra> compras = null;
+    public List<Compra> buscarCompras(String cpf, String dataCompra) {
+        LocalDate data = getLocalDateFromString(dataCompra);
+        validaParametrosDeCompra(cpf, data);
+        List<Compra> compras = new ArrayList<>();
         if (cpf != null) compras = this.buscarComprasClientePorCpf(cpf);
-        if (dataCompra != null) compras = this.buscarComprasPorData(dataCompra);
+        if (dataCompra != null) compras = this.buscarComprasPorData(data);
         return compras;
+    }
+
+    private LocalDate getLocalDateFromString(String dataCompra) {
+        try {
+            return LocalDate.parse(dataCompra, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } catch (DateTimeParseException exception) {
+            throw new BusinessException(StringUtils.buscarMensagemDeValidacao("compra.data.formato.invalido", dataCompra));
+        }
     }
 
     private List<Produto> injetarItensNaCompra(NovaCompraDTO novaCompraDTO) {
@@ -103,10 +116,14 @@ public class CompraServiceImpl implements CompraService {
     }
 
     public List<Compra> buscarComprasClientePorCpf(String cpf) {
-        return null;
+        return buscarTodasCompras().stream().filter(compra -> compra.getCliente().getCpf().equals(cpf)).collect(Collectors.toList());
     }
 
     public List<Compra> buscarComprasPorData(LocalDate dataCompra) {
-        return null;
+        return buscarTodasCompras().stream().filter(compra -> compra.getDataCompra().equals(dataCompra)).collect(Collectors.toList());
+    }
+
+    public List<Compra> buscarTodasCompras() {
+        return CollectionUtils.getListFromIterable(compraRepository.findAll());
     }
 }
