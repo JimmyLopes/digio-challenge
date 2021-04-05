@@ -33,7 +33,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Cliente salvarCliente(@Valid NovoClienteDTO novoClienteDTO) {
         Cliente cliente = mapper.map(novoClienteDTO, Cliente.class);
-        if (isEmailUnico(cliente.getEmail())) {
+        if (isEmailDuplicado(cliente.getEmail())) {
             throw new BusinessException(StringUtils.buscarMensagemDeValidacao("email.existente", novoClienteDTO.getEmailCliente()));
         }
         return clienteRepository.save(cliente);
@@ -49,12 +49,12 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public List<Cliente> buscarClientesPaginado() {
+    public List<Cliente> buscarClientes() {
         return CollectionUtils.getListFromIterable(clienteRepository.findAll());
     }
 
     @Override
-    public Cliente buscarPorParametro(String cpf, String email) {
+    public Cliente buscarClientePorParametro(String cpf, String email) {
         validaParametros(cpf, email);
         Cliente cliente = null;
         if (cpf != null) cliente = this.buscarClientePorCpf(cpf);
@@ -78,7 +78,7 @@ public class ClienteServiceImpl implements ClienteService {
                 .orElseThrow(() -> new ResourceNotFoundException(StringUtils.buscarMensagemDeValidacao("cliente.email.inexistente", email)));
     }
 
-    private boolean isEmailUnico(String email) {
+    private boolean isEmailDuplicado(String email) {
         return CollectionUtils.getListFromIterable(clienteRepository.findAll()).stream().anyMatch(cliente -> cliente.getEmail().equals(email));
     }
 

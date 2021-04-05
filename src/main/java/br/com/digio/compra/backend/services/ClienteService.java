@@ -13,9 +13,9 @@ public interface ClienteService {
 
     Cliente alterarNomeCliente(@Valid NovoNomeClienteDTO novoNomeClienteDTO, String idCliente);
 
-    List<Cliente> buscarClientesPaginado();
+    List<Cliente> buscarClientes();
 
-    Cliente buscarPorParametro(String cpf, String email);
+    Cliente buscarClientePorParametro(String cpf, String email);
 
     Cliente buscarClientePorId(String idCliente);
 }

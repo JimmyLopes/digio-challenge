@@ -30,13 +30,13 @@ public class ClienteLeituraResource implements ResponseResource {
 
     @GetMapping
     public ResponseEntity<RestResponseDTO<Page<ClienteDTO>>> buscarClientes() {
-        return retornarSucesso(new PageImpl<>(clienteService.buscarClientesPaginado()
+        return retornarSucesso(new PageImpl<>(clienteService.buscarClientes()
                 .stream().map(cliente -> mapper.map(cliente, ClienteDTO.class)).collect(Collectors.toList())));
     }
 
     @GetMapping("/parametro")
     public ResponseEntity<RestResponseDTO<ClienteDTO>> buscarClientePorParametro(@RequestParam(required = false) String cpf,
                                                                                  @RequestParam(required = false) String email) {
-        return retornarSucesso(mapper.map(clienteService.buscarPorParametro(cpf, email), ClienteDTO.class));
+        return retornarSucesso(mapper.map(clienteService.buscarClientePorParametro(cpf, email), ClienteDTO.class));
     }
 }
