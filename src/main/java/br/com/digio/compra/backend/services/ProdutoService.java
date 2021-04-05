@@ -14,7 +14,7 @@ public interface ProdutoService {
 
     Produto alterarValorProduto(NovoValorProdutoDTO novoValorProdutoDTO, String idProduto);
 
-    List<Produto> buscarTodosPaginado();
+    List<Produto> buscarTodosProdutos();
 
     Produto buscarProdutoPorId(String id);
 }

@@ -49,7 +49,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public List<Produto> buscarTodosPaginado() {
+    public List<Produto> buscarTodosProdutos() {
         return CollectionUtils.getListFromIterable(produtoRepository.findAll());
     }
 

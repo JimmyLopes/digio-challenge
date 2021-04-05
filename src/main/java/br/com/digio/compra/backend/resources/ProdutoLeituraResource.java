@@ -29,7 +29,7 @@ public class ProdutoLeituraResource implements ResponseResource {
 
     @GetMapping
     public ResponseEntity<RestResponseDTO<Page<ProdutoDTO>>> buscarProdutos() {
-        return retornarSucesso(new PageImpl<>(produtoService.buscarTodosPaginado()
+        return retornarSucesso(new PageImpl<>(produtoService.buscarTodosProdutos()
                 .stream().map(produto -> mapper.map(produto, ProdutoDTO.class)).collect(Collectors.toList())));
     }
 }
