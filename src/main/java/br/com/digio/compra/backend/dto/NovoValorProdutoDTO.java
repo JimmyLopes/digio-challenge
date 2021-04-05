@@ -4,8 +4,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 public class NovoValorProdutoDTO {
-    @NotNull
-    @Positive
+
+    @NotNull(message = "produto.novo.valor.vazio")
+    @Positive(message = "produto.novo.valor.invalido")
     private Double novoValor;
 
     public Double getNovoValor() {

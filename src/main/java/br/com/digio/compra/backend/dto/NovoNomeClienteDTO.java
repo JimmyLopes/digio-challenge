@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class NovoNomeClienteDTO {
 
-    @NotBlank
+    @NotBlank(message = "cliente.nome.novo")
     private String novoNomeCliente;
 
     public String getNovoNomeCliente() {

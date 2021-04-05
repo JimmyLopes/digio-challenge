@@ -12,7 +12,7 @@ public class NovoProdutoDTO {
     private String nomeProduto;
     @NotNull(message = "produto.categorio.vazio")
     private ECategoria categoria;
-    @Positive(message = "produto.valor.invalido")
+    @Positive(message = "produto.valor.vazio")
     private Double valorProduto;
     @NotNull(message = "produto.maioridade.nulo")
     private boolean isMarioridade;
