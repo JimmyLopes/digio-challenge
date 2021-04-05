@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 @Validated
@@ -64,6 +65,8 @@ public class CompraServiceImpl implements CompraService {
 
     private LocalDate getLocalDateFromString(String dataCompra) {
         try {
+            if (dataCompra == null)
+                return null;
             return LocalDate.parse(dataCompra, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         } catch (DateTimeParseException exception) {
             throw new BusinessException(StringUtils.buscarMensagemDeValidacao("compra.data.formato.invalido", dataCompra));
@@ -83,9 +86,9 @@ public class CompraServiceImpl implements CompraService {
 
     private Collection<? extends Produto> addItemXVezes(Produto produto, Integer quantidade) {
         List<Produto> produtos = new ArrayList<>();
-        for (int i = 0; i < quantidade; i++) {
-            produtos.add(produto);
-        }
+        IntStream.iterate(0, i -> i++)
+                .limit(quantidade)
+                .forEach(i -> produtos.add(produto));
         return produtos;
     }
 
@@ -107,9 +110,9 @@ public class CompraServiceImpl implements CompraService {
 
     private void validaParametrosDeCompra(String cpf, LocalDate dataCompra) {
         if (cpf != null && dataCompra != null)
-            throw new BusinessException(StringUtils.buscarMensagemDeValidacao("cpf.data.compra.preenchido"));
+            throw new BusinessException(StringUtils.buscarMensagemDeValidacao("compra.cpf.data.compra.preenchido"));
         if (cpf == null && dataCompra == null)
-            throw new BusinessException(StringUtils.buscarMensagemDeValidacao("cpf.data.compra.nao.preenchido"));
+            throw new BusinessException(StringUtils.buscarMensagemDeValidacao("compra.cpf.data.compra.nao.preenchido"));
     }
 
     public List<Compra> buscarComprasClientePorCpf(String cpf) {
