@@ -1,0 +1,22 @@
+{
+  "id": "fake_data",
+  "cliente": {
+    "id": "fake_data",
+    "nome": "fake_data",
+    "cpf": "fake_data",
+    "email": "fake_data",
+    "dataNascimento": "2016-09-30"
+  },
+  "produtos": [
+    {
+      "id": "fake_data",
+      "nome": "fake_data",
+      "valor": 73.24,
+      "categoria": "PRIMARIO",
+      "isMaioridade": true
+    }
+  ],
+  "dataCompra": "2019-12-06",
+  "valorCompra": 3.31,
+  "valorCompraComDesconto": 8.28
+}

@@ -11,7 +11,6 @@ import br.com.digio.compra.backend.services.CompraService;
 import br.com.digio.compra.backend.services.ProdutoService;
 import br.com.digio.compra.backend.utils.CollectionUtils;
 import br.com.digio.compra.backend.utils.StringUtils;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -32,14 +31,12 @@ public class CompraServiceImpl implements CompraService {
     private final CompraRepository compraRepository;
     private final ClienteService clienteService;
     private final ProdutoService produtoService;
-    private final ModelMapper mapper;
 
     @Autowired
-    public CompraServiceImpl(CompraRepository compraRepository, ClienteService clienteService, ProdutoService produtoService, ModelMapper mapper) {
+    public CompraServiceImpl(CompraRepository compraRepository, ClienteService clienteService, ProdutoService produtoService) {
         this.compraRepository = compraRepository;
         this.clienteService = clienteService;
         this.produtoService = produtoService;
-        this.mapper = mapper;
     }
 
     @Override
