@@ -5,10 +5,21 @@
 -> Link Collection Postman
 https://www.getpostman.com/collections/a2e487d1a45f7da05a94
 
--> API desenvolvida com Java 8 utilizando o Spring Boot -> Funcionalidades:
-- Cadastrar de Cliente - Editar nome de um Cliente - Buscar todos Clientes - Buscar Cliente por CPF - Buscar Cliente por
-E-mail - Cadastrar de Produto - Excluir de Produto - Editar valor de Produto - Buscar todos Produtos - Cadastrar nova
-Compra - Buscar todas as Compras - Buscar Compra por CPF Cliente - Buscar Compra por data
+-> API Rest desenvolvida com Java 8 utilizando o Spring Boot -> Funcionalidades:
+
+- Cadastrar de Cliente
+- Editar nome de um Cliente
+- Buscar todos Clientes
+- Buscar Cliente por CPF
+- Buscar Cliente por E-mail
+- Cadastrar de Produto
+- Excluir de Produto
+- Editar valor de Produto
+- Buscar todos Produtos
+- Cadastrar nova Compra
+- Buscar todas as Compras
+- Buscar Compra por CPF Cliente
+- Buscar Compra por data
 
 -> Banco utilizado: Redis
 
